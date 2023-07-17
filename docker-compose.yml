@@ -3,7 +3,6 @@ services:
   gpt4all:
     build:
       context: .
-      target: default  # Specify the variant to build
 #      args:
 #        - LCL_SRC_DIR=text-generation-webui  # Developers - see Dockerfile app_base
     container_name: gpt4all

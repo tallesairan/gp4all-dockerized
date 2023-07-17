@@ -1,124 +1,183 @@
-# Introduction
-This project dockerises the deployment of [oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui) and its variants. It provides a default configuration (corresponding to a vanilla deployment of the application) as well as pre-configured support for other set-ups (e.g., latest `llama-cpp-python` with GPU offloading, the more recent `triton` and `cuda` branches of GPTQ). The images are available on Docker Hub: [https://hub.docker.com/r/atinoda/text-generation-webui](https://hub.docker.com/r/atinoda/text-generation-webui)
+# LoLLMS Web UI
+<div align="center">
+  <img src="https://github.com/ParisNeo/lollms/blob/main/lollms/assets/logo.png" alt="Logo" width="200" height="200">
+</div>
 
-*This goal of this project is to be to [oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui), what [AbdBarho/stable-diffusion-webui-docker](https://github.com/AbdBarho/stable-diffusion-webui-docker) is to [AUTOMATIC1111/stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui).*
+![GitHub license](https://img.shields.io/github/license/ParisNeo/lollms-webui)
+![GitHub issues](https://img.shields.io/github/issues/ParisNeo/lollms-webui)
+![GitHub stars](https://img.shields.io/github/stars/ParisNeo/lollms-webui)
+![GitHub forks](https://img.shields.io/github/forks/ParisNeo/lollms-webui)
+[![Discord](https://img.shields.io/discord/1092918764925882418?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](https://discord.gg/4rR282WJb6)
+[![Follow me on Twitter](https://img.shields.io/twitter/follow/SpaceNerduino?style=social)](https://twitter.com/SpaceNerduino)
+[![Follow Me on YouTube](https://img.shields.io/badge/Follow%20Me%20on-YouTube-red?style=flat&logo=youtube)](https://www.youtube.com/user/Parisneo)
+[![pages-build-deployment](https://github.com/ParisNeo/lollms-webui/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ParisNeo/lollms-webui/actions/workflows/pages/pages-build-deployment)
 
-# Usage
-*This project currently supports Linux as the deployment platform. It will also probably work using WSL2.*
 
-## Pre-Requisites
-- docker
-- docker compose
-- CUDA docker runtime
+Welcome to LoLLMS WebUI (Lord of Large Language Models: One tool to rule them all), the hub for LLM (Large Language Model) models. This project aims to provide a user-friendly interface to access and utilize various LLM models for a wide range of tasks. Whether you need help with writing, coding, organizing data, generating images, or seeking answers to your questions, LoLLMS WebUI has got you covered.
 
-## Docker Compose
-This is the recommended deployment method (it is the easiest and quickest way to manage folders and settings through updates and reinstalls). The recommend variant is `default` (it is an enhanced version of the vanilla application).
+[Click here for my youtube video on how to use the tool]([https://youtu.be/ds_U0TDzbzI](https://youtu.be/MxXNGv1zJ1A))
+## Features
 
-### Select variant
-Each variant has the 'extras' incuded in `default` but has some changes made as described in the table. Choose the desired variant by setting the image `:tag` in `docker-compose.yml` to one of the following options:
+- Choose your preferred binding, model, and personality for your tasks
+- Enhance your emails, essays, code debugging, thought organization, and more
+- Explore a wide range of functionalities, such as searching, data organization, and image generation
+- Easy-to-use UI with light and dark mode options
+- Integration with GitHub repository for easy access
+- Support for different personalities with predefined welcome messages
+- Thumb up/down rating for generated answers
+- Copy, edit, and remove messages
+- Local database storage for your discussions
+- Search, export, and delete multiple discussions
+- Support for Docker, conda, and manual virtual environment setups
 
-| Variant | Description | 
-|---|---|
-| `default` | Implementation of the vanilla deployment from source. Plus pre-installed `ExLlAMA` library from `turboderp/exllama`, and CUDA GPU offloading enabled for `llama-cpp`. *This version is recommended for most users.*  |
-| `default-nightly` | Automated nightly build of the `default` variant. This image is built and pushed automatically - it is untested and may be unstable. *Suitable when more frequent updates are required and instability is not an issue.*  |
-| `triton` | Updated `GPTQ-for-llama` using the latest `triton` branch from `qwopqwop200/GPTQ-for-LLaMa`. Suitable for Linux only. *This version is accurate but a little slow.* |
-| `cuda` | Updated `GPTQ-for-llama` using the latest `cuda` branch from `qwopqwop200/GPTQ-for-LLaMa`. *This version is very slow!* |
-| `monkey-patch` | Use LoRAs in 4-Bit `GPTQ-for-llama` mode. ***DEPRECATION WARNING:** This version is outdated, but will remain for now.* |
-| `llama-cublas` | CUDA GPU offloading enabled for `llama-cpp`. Use by setting option `n-gpu-layers` > 0. ***DEPRECATION WARNING:** This capability has been rolled into the default. The variant will be removed if the upstream dependency does not conflict with `default`.* |
+## Screenshots
+Main page
+  ![image](https://github.com/ParisNeo/lollms-webui/assets/827993/9fd5ed82-cdff-467f-b159-9df61bc36b96)
+Settings page
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/50b1f51f-a85f-4a23-ba5d-979f51c8c83b)
+Hardware status
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/b10cecdf-d62f-4be8-b9af-59d6c6e7e43a)
+Support for most known bindings
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/516fe855-5ed9-4677-8350-3ae63478b3d6)
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/3e185079-e09b-4325-8ca0-fb66471eab68)
+Huge and updated models zoo for each binding type
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/a86f543c-4c60-43e4-8501-60d8d29d6938)
+Models search options
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/2441830d-0eca-4df7-8fa1-ffef4e16be8d)
+Custom models installation
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/50286fdf-16be-48e8-8bfa-d4e47b2160ff)
+Huge personalities library (about 300 personalities split in 36 categories)
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/188847e6-7c49-45e1-acf5-ca5a1f32ff53)
+Personalities search option
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/3b88a665-edb9-4ede-922a-3f2df9e749f2)
+Personalities bag where you can activate simultaniously multiple personalities
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/0955adc2-5e3b-4a49-9f54-7340be942d05)
+Multiple personalities discussions
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/32f630b8-712e-4d4c-8a69-fb932a3c856c)
+Hot personality selection
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/fbc7f249-d94c-4525-99b3-b0195b5bd800)
 
-*See: [oobabooga/text-generation-webui/blob/main/docs/GPTQ-models-(4-bit-mode).md](https://github.com/oobabooga/text-generation-webui/blob/main/docs/GPTQ-models-(4-bit-mode).md), [obabooga/text-generation-webui/blob/main/docs/llama.cpp-models.md](https://github.com/oobabooga/text-generation-webui/blob/main/docs/llama.cpp-models.md), and [oobabooga/text-generation-webui/blob/main/docs/ExLlama.md](https://github.com/oobabooga/text-generation-webui/blob/main/docs/ExLlama.md) for more information on variants.*
+Artbot
+  ![image](https://github.com/ParisNeo/lollms-webui/assets/827993/45b507b5-d9be-4111-8ad4-266e27e334d4)
+Lollms personality maker
+  ![image](https://github.com/ParisNeo/lollms-webui/assets/827993/338a250b-1298-42a7-b4ec-a9f674353dea)
+Chat with docs with commands like send file and set database
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/9b9da237-2fa8-410c-a05a-28d0aa2dc494)
 
-### Deploy
-Deploy the service:
+Python Specialist
+![image](https://github.com/ParisNeo/lollms-webui/assets/827993/01eee298-00e1-4caa-97c1-97b74ba8956d)
 
-`docker compose up`
 
-### Remove
-Remove the service:
 
-`docker compose down -v`
 
-## Configuration
-These configuration instructions describe the relevant details for this docker wrapper. Refer to [oobabooga/text-generation-webui](https://github.com/oobabooga/text-generation-webui) documentation for usage of the application itself.
+## Installation
 
-### Ports
-Three commonly used ports are exposed:
+### Prerequisites
 
-|  Port  | Description | Configuration |
-|  ----  | ----------- | ------------- |
-| `7860` | Web UI port | Pre-configured and enabled in `docker-compose.yml` |
-| `5000` | API port    | Enable by adding `--api --extensions api` to launch args then uncomment mapping in `docker-compose.yml` |
-| `5005` | Streaming port | Enable by adding `--api --extensions api` to launch args then uncomment mapping in `docker-compose.yml` |
+Before installing LoLLMS WebUI, make sure you have the following dependencies installed:
 
-*Extensions may use additional ports - check the application documentation for more details.*
+- [Python 3.10 or higher](https://www.python.org/downloads/release/python-3100/)
+- Pip - installation depends on OS, but make sure you have it installed.
+- [Git (for cloning the repository)](https://git-scm.com/downloads)
+- [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/) with c++ build tools (for CUDA [nvidia GPU's]) - optional for windows
+- Build essentials (for CUDA [nvidia GPU's]) - optional for linux
+- [Nvidia CUDA toolkit 11.7 or higher](https://developer.nvidia.com/cuda-downloads) (for CUDA [nvidia GPU's]) - optional
+- [Miniconda3](https://docs.conda.io/en/latest/miniconda.html) - optional (more stable than python)
 
-### Volumes
-The provided example docker compose maps several volumes from the local `config` directory into the container: `loras, models, presets, prompts, training, extensions`. If these folders are empty, they will be initialised when the container is run.
+Ensure that the Python installation is in your system's PATH, and you can call it from the terminal. To verify your Python version, run the following command:
 
-Extensions will persist their state between container launches if you use a mapped folder - **but they will not automatically update when a new image is released, so this feature is disabled by default.** The whole extensions folder can be mapped (all extensions are persisted) or individual extensions can be mapped one at a time. Examples are given in the `docker-compose.yml`.
+Windows:
+```bash
+python --version
+```
 
-*If you are getting an error about missing files, try clearing these folders and letting the service re-populate them.*
+Linux:
+```bash
+python3 --version
+```
 
-### Extra launch arguments
-Extra launch arguments can be defined in the environment variable `EXTRA_LAUNCH_ARGS` (e.g., `"--model MODEL_NAME"`, to load a model at launch). The provided default extra arguments are `--verbose` and `--listen` (which makes the webui available on your local  network) and these are set in the `docker-compose.yml`.
+If you receive an error or the version is lower than 3.10, please install a newer version and try again.
 
-*Launch arguments should be defined as a space-separated list, just like writing them on the command line. These arguments are passed to the `server.py` module.*
+### Installation steps
 
-### Runtime extension build
-Extensions which should be built during startup can be defined in the environment variable `BUILD_EXTENSIONS_LIVE` (e.g., `"silero_tts whisper_stt"`, will rebuild those extensions at launch). This feature may be useful if you are developing a third-party extension and need its dependencies to refresh at launch.
+For detailed installation steps please refer to these documents:
 
-**Startup times will be much slower** if you use this feature, because it will rebuild the named extensions every time the container is started (i.e., don't use this feature unless you are certain that you need it.)
+- [Windows 10/11](./docs/usage/AdvancedInstallInstructions.md#windows-10-and-11)
+- [Linux (tested on ubuntu)](./docs/usage/AdvancedInstallInstructions.md#linux)
+#### Easy install
 
-*Extension names for runtime build should be defined as a space-separated list.*
+- Download the appropriate application launcher based on your platform:
+    For Windows: `webui.bat`
+    For Linux: `webui.sh`
+    For Linux: `c_webui.sh` - using miniconda3
+- Place the downloaded launcher in a folder of your choice, for example:
+    Windows: `C:\ai\LoLLMS-webui`
+    Linux: `/home/user/ai/LoLLMS-webui`
+- Run the launcher script. Note that you might encounter warnings from antivirus or Windows Defender due to the tool's newness and limited usage. These warnings are false positives caused by reputation conditions in some antivirus software. You can safely proceed with running the script.
+Once the installation is complete, the LoLLMS WebUI will launch automatically.
 
-### Updates
-These projects are moving quickly! To update to the most recent version on Docker hub, pull the latest image:
+#### Using Conda
+If you use conda, you can create a virtual environment and install the required packages using the provided `requirements.txt` file. Here's an example of how to set it up:
+First clone the project or download the zip file and unzip it:
 
-`docker compose pull`
+```bash
+git clone https://github.com/ParisNeo/lollms-webui.git
+cd lollms-webui
+```
+Now create a new conda environment, activate it and install requirements
 
-Then recreate the container:
+```bash
+conda create --prefix ./env python=3.10
+conda activate ./env
+pip install -r requirements.txt
+```
+#### Using Docker
+Alternatively, you can use Docker to set up the LoLLMS WebUI. Please refer to the Docker documentation for installation instructions specific to your operating system.
 
-`docker compose up`
+## Usage
 
-*When the container is launched, it will print out how many commits behind origin the current build is, so you can decide if you want to update it. Docker hub images will be periodically updated. The `default-nightly` image is built every day but it is not manually tested. If you need bleeding edge versions you must build locally.*
+You can launch the app from the webui.sh or webui.bat launcher. It will automatically perform updates if any are present. If you don't prefer this method, you can also activate the virtual environment and launch the application using python app.py from the root of the project.
+Once the app is running, you can go to the application front link displayed in the console (by default localhost:9600 but can change if you change configuration) 
+### Selecting a Model and Binding
+- Open the LoLLMS WebUI and navigate to the Settings page.
+- In the Models Zoo tab, select a binding from the list (e.g., llama-cpp-official).
+- Wait for the installation process to finish. You can monitor the progress in the console.
+- Once the installation is complete, click the Install button next to the desired model.
+- After the model installation finishes, select the model and press Apply changes.
+- Remember to press the Save button to save the configuration.
 
-### Build (optional)
-The provided `docker-compose.yml.build` shows how to build the image locally. You can use it as a reference to modify the original `docker-compose.yml`, or you can rename it and use it as-is. Choose the desired variant to build by setting the build `target` and then run:
+### Starting a Discussion
+- Go to the Discussions view.
+- Click the + button to create a new discussion.
+- You will see a predefined welcome message based on the selected personality (by default, LoLLMS).
+- Ask a question or provide an initial prompt to start the discussion.
+- You can stop the generation process at any time by pressing the Stop Generating button.
 
-`docker compose build`
+### Managing Discussions
+- To edit a discussion title, simply type a new title or modify the existing one.
+- To delete a discussion, click the Delete button.
+- To search for specific discussions, use the search button and enter relevant keywords.
+- To perform batch operations (exporting or deleting multiple discussions), enable Check Mode, select the discussions, and choose the desired action.
 
-To do a clean build and ensure the latest version:
+# Contributing
+Contributions to LoLLMS WebUI are welcome! If you encounter any issues, have ideas for improvements, or want to contribute code, please open an issue or submit a pull request on the GitHub repository.
 
-`docker compose build --no-cache`
+# License
+This project is licensed under the Apache 2.0 License. You are free to use this software commercially, build upon it, and integrate it into your own projects. See the [LICENSE](https://github.com/ParisNeo/lollms-webui/blob/main/LICENSE) file for details.
 
-*If you choose a different variant later, you must **rebuild** the image.*
+# Acknowledgements
+Please note that LoLLMS WebUI is not affiliated with the LoLLMS application developed by Nomic AI. The latter is a separate professional application available at LoLLMS.io, which has its own unique features and community.
 
-### Developers / Advanced Users
-The Dockerfile can be easily modified to compile and run the application from a local source folder. This is useful if you want to do some development or run a custom version. See the Dockerfile itself for instructions on how to do this.
+We express our gratitude to all the contributors who have made this project possible and welcome additional contributions to further enhance the tool for the benefit of all users.
 
-*Support is not provided for this deployment pathway. It is assumed that you are competent and willing to do your own debugging! Pro-tip: start by placing a `text-generation-webui` repo into the project folder.*
+# Contact
 
-## Standalone Container
-NOT recommended, instructions are included for completeness.
+For any questions or inquiries, feel free to reach out via our discord server: https://discord.gg/4rR282WJb6
 
-### Run
-Run a network accessible container (and destroy it upon completion):
+Thank you for your interest and support!
 
-`docker run -it --rm -e EXTRA_LAUNCH_ARGS="--listen --verbose" --gpus all -p 7860:7860 atinoda/text-generation-webui:default`
+If you find this tool useful, don't forget to give it a star on GitHub, share your experience, and help us spread the word. Your feedback and bug reports are valuable to us as we continue developing and improving LoLLMS WebUI.
 
-### Build and run (optional)
-Build the image for the default target and tag it as `local` :
+If you enjoyed this tutorial, consider subscribing to our YouTube channel for more updates, tutorials, and exciting content.
 
-`docker build --target default -t text-generation-webui:local .`
-
-Run the local image with local network access (and destroy it upon completion):
-
-`docker run -it --rm -e EXTRA_LAUNCH_ARGS="--listen --verbose" --gpus all -p 7860:7860 text-generation-webui:local`
-
-# Contributions
-Contributions are welcomed - please feel free to submit a PR. More variants (e.g., AMD/ROC-M support) and Windows support can help lower the barrier to entry, make this technology accessible to as many people as possible, and push towards democratising the severe impacts that AI is having on our society.
-
-*Also - it's fun to code and LLMs are cool.*
-
-# DISCLAIMER
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Happy exploring with LoLLMS WebUI!

@@ -1,56 +1,16 @@
-ARG BASE_IMAGE=runpod/pytorch:3.10-2.0.0-117
-FROM ${BASE_IMAGE} as dev-base
+FROM python:3.10
 
-WORKDIR /src
+WORKDIR /srv
+COPY ./requirements.txt .
 
-RUN pip install torch transformers accelerate
+RUN python3 -m venv venv && . venv/bin/activate
+RUN python3 -m pip install --no-cache-dir -r requirements.txt --upgrade pip
 
-RUN git clone --recurse-submodules https://github.com/nomic-ai/gpt4all.git
-RUN cd gpt4all && git submodule update --init
+COPY ./app.py /srv/app.py
+COPY ./api /srv/api
+COPY ./static /srv/static
+COPY ./templates /srv/templates
+COPY ./web /srv/web
 
-RUN mkdir -p /opt/gpt4all
-RUN cp gpt4all/chat/gpt4all-* /opt/gpt4all/
-
-# If gpt4all-lora-quantized.bin exists in chat dir, comment out below
-RUN apt update \
-    && apt install -y wget \
-    && cd /opt/gpt4all \
-    && wget https://the-eye.eu/public/AI/models/nomic-ai/gpt4all/gpt4all-lora-quantized.bin
-
-
-# Update Python to 3.11
-RUN apt remove python3-apt -y
-RUN apt autoremove -y
-RUN apt autoclean -y
-RUN apt install python3-apt -y
-RUN apt-get install software-properties-common build-essential -y
-RUN apt install wget build-essential libncursesw5-dev libssl-dev \
-    libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev -y
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt install python3.11-dev python3.11-venv -y
-RUN pip install virtualenv
-
-# Python Client
-RUN git clone https://github.com/nomic-ai/nomic.git
-RUN cd nomic && pip install .[GPT4All]
-RUN pip install nomic
-RUN cd nomic/bin && pip wheel peft-0.3.0.dev0-py3-none-any.whl && \
-    pip install transformers-4.28.0.dev0-py3-none-any.whl
-
-RUN echo '#!/bin/bash' > /usr/local/bin/gpt4all \
-    && echo 'cd /opt/gpt4all' >> /usr/local/bin/gpt4all \
-    && echo './gpt4all-lora-quantized-linux-x86 -m ./gpt4all-lora-quantized.bin' >> /usr/local/bin/gpt4all \
-    && chmod +x /usr/local/bin/gpt4all
-
-
-# GUI
-RUN git clone https://github.com/nomic-ai/gpt4all-ui
-RUN cd gpt4all-ui && bash ./install.sh
-RUN rm /src/gpt4all-ui/models/gpt4all-lora-quantized-ggml.bin
-RUN wget https://huggingface.co/TheBloke/Nous-Hermes-13B-GGML/resolve/main/nous-hermes-13b.ggmlv3.q4_0.bin -O /src/gpt4all-ui/nous-hermes-13b.ggmlv3.q4_0.bin
-# RUN cp /opt/gpt4all/gpt4all-lora-quantized.bin /src/gpt4all-ui/models/gpt4all-lora-quantized.bin
-
-
-ADD start.sh /src
-RUN chmod +x /src/start.sh
-CMD [ "/src/start.sh" ]
+# COPY ./models /srv/models  # Mounting model is more efficient
+CMD ["python", "app.py", "--host", "0.0.0.0", "--port", "9600", "--db_path", "data/database.db"]

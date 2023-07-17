@@ -1,0 +1,14 @@
+tqdm
+psutil
+flask
+flask_socketio
+pytest
+pyyaml
+markdown
+gevent
+gevent-websocket
+lollms
+langchain
+requests
+eventlet
+websocket-client

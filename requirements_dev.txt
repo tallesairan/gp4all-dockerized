@@ -1,0 +1,12 @@
+tqdm
+flask
+flask_socketio
+nomic
+pytest
+pyyaml
+markdown
+pyllamacpp==2.0.0
+gpt4all-j 
+gpt4all
+transformers
+pyaipersonality>=0.0.11

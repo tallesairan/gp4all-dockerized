@@ -1,7 +1,9 @@
 version: "3"
 services:
-  gpt4all-docker:
-    image: runpod/gpt4all:latest # Specify variant as the :tag
+    gpt4all-docker:
+        build:
+        context: .
+        target: default  # Specify the variant to build
     container_name: gpt4all
 #    environment:
 #      - EXTRA_LAUNCH_ARGS="--listen --verbose" # Custom launch args (e.g., --model MODEL_NAME)

@@ -9,8 +9,12 @@ RUN python3 -m pip install --no-cache-dir -r requirements.txt --upgrade pip
 COPY ./app.py /srv/app.py
 COPY ./api /srv/api
 COPY ./static /srv/static
+COPY ./assets /srv/assets
 COPY ./templates /srv/templates
 COPY ./web /srv/web
+COPY ./configs /root/Documents/lollms/configs
+COPY ./configs /srv/web
+COPY ./configs /srv
 
 # COPY ./models /srv/models  # Mounting model is more efficient
 CMD ["python", "app.py", "--host", "0.0.0.0", "--port", "9600", "--db_path", "data/database.db"]

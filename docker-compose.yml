@@ -3,11 +3,11 @@ services:
   gpt4all-docker:
     image: runpod/gpt4all:latest # Specify variant as the :tag
     container_name: gpt4all
-    environment:
-      - EXTRA_LAUNCH_ARGS="--listen --verbose" # Custom launch args (e.g., --model MODEL_NAME)
+#    environment:
+#      - EXTRA_LAUNCH_ARGS="--listen --verbose" # Custom launch args (e.g., --model MODEL_NAME)
 #      - BUILD_EXTENSIONS_LIVE="silero_tts whisper_stt" # Install named extensions during every container launch. THIS WILL SIGNIFICANLTLY SLOW LAUNCH TIME.
     ports:
-      - 7890:7890  # Default web port
+      - 9600:9600  # Default web port
 #      - 5000:5000  # Default API port
 #      - 5005:5005  # Default streaming port
 #      - 5001:5001  # Default OpenAI API extension port

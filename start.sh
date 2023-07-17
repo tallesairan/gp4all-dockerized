@@ -4,7 +4,7 @@ echo "pod started"
 
 cd /src/gpt4all-ui
 source /src/gpt4all-ui/env/bin/activate
-python3 app.py --model "gpt4all-lora-quantized-ggml.bin" --port 9600 --host "0.0.0.0" &
+python3 app.py --model "nous-hermes-13b.ggmlv3.q4_0.bin" --port 9600 --host "0.0.0.0" &
 
 if [[ $PUBLIC_KEY ]]
 then

@@ -47,7 +47,7 @@ RUN echo '#!/bin/bash' > /usr/local/bin/gpt4all \
 RUN git clone https://github.com/nomic-ai/gpt4all-ui
 RUN cd gpt4all-ui && bash ./install.sh
 RUN rm /src/gpt4all-ui/models/gpt4all-lora-quantized-ggml.bin
-RUN wget https://huggingface.co/ParisNeo/GPT4All/resolve/main/gpt4all-lora-quantized-ggml.bin -O /src/gpt4all-ui/models/gpt4all-lora-quantized-ggml.bin
+RUN wget https://huggingface.co/TheBloke/Nous-Hermes-13B-GGML/resolve/main/nous-hermes-13b.ggmlv3.q4_0.bin -O /src/gpt4all-ui/nous-hermes-13b.ggmlv3.q4_0.bin
 # RUN cp /opt/gpt4all/gpt4all-lora-quantized.bin /src/gpt4all-ui/models/gpt4all-lora-quantized.bin
 
 

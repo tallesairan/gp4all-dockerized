@@ -1,15 +1,17 @@
 version: "3"
 services:
-    gpt4all-docker:
-        build:
-        context: .
-        target: default  # Specify the variant to build
+  gpt4all:
+    build:
+      context: .
+      target: default  # Specify the variant to build
+#      args:
+#        - LCL_SRC_DIR=text-generation-webui  # Developers - see Dockerfile app_base
     container_name: gpt4all
-#    environment:
-#      - EXTRA_LAUNCH_ARGS="--listen --verbose" # Custom launch args (e.g., --model MODEL_NAME)
+    environment:
+      - EXTRA_LAUNCH_ARGS="--listen --verbose" # Custom launch args (e.g., --model MODEL_NAME)
 #      - BUILD_EXTENSIONS_LIVE="silero_tts whisper_stt" # Install named extensions during every container launch. THIS WILL SIGNIFICANLTLY SLOW LAUNCH TIME.
     ports:
-      - 9600:9600  # Default web port
+      - 7860:7860  # Default web port
 #      - 5000:5000  # Default API port
 #      - 5005:5005  # Default streaming port
 #      - 5001:5001  # Default OpenAI API extension port
